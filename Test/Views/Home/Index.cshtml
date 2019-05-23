@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" action="~/Home/CreatePasta">
+    <h1>Pasta</h1>
+    <textarea name="text" rows="10"></textarea>
+    <p>Author's name</p>
+    <input type="text" name="name" />
+    <p>Status</p>
+    <select name="status">
+        <option value="0">Public</option>
+        <option value="1">Unlisted</option>
+    </select>
+    <p>Time</p>
+    <select name="time">
+        <option value="10M">10 minut</option>
+        <option value="1D">1 day</option>
+        <option value="1M">1 mounth</option>
+        <option value="Always">Always</option>
+    </select>
+    <input type="submit" value="Send"/>
+</form>
