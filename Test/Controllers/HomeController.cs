@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Test.Models;
 using System.Security.Cryptography;
+using System.Net;
 
 namespace Test.Controllers
 {
@@ -15,7 +16,10 @@ namespace Test.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var pasta = from p in db.Pastas
+                        select p;
+            List<Pasta> model = pasta.ToList();
+            return View(model);
         }
 
         [HttpPost]
@@ -31,20 +35,41 @@ namespace Test.Controllers
             return View("Index");
         }
 
+        [HttpGet]
+        public ActionResult IndexPasta(string Hash)
+        {
+            if (Hash == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var pasta = from p in db.Pastas
+                        select p;
+            pasta = pasta.Where(p => p.Hash == Hash);
+            if(pasta == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pasta);
+        }
+
         private string GenerateHash()
         {
             string Hash = string.Empty;
-            while(true)
+            var bytes = new byte[16];
+            while (true)
             {
-                var hash = new RNGCryptoServiceProvider();
-                Hash = hash.ToString();
+                using (var rng = new RNGCryptoServiceProvider())
+                {
+                    rng.GetBytes(bytes);
+                }
+                Hash = BitConverter.ToString(bytes).Replace("-", "").ToLower();
                 var pasta = from p in db.Pastas
                             where p.Hash == Hash
                             select p.Hash;
-                if (pasta == null)
+                string hash1 = pasta.ToString();
+                if (Hash != hash1)
                     break;
             }
-
             return Hash;
         }
     }

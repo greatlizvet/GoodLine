@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Test.Models.Pasta>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,3 +23,11 @@
     </select>
     <input type="submit" value="Send"/>
 </form>
+<div>
+    <p>Last pastas</p>
+    @foreach(var item in Model)
+    {
+        @Html.ActionLink(item.AuthorName, "IndexPasta", new { hash = item.Hash });
+        <br />
+    }
+</div>

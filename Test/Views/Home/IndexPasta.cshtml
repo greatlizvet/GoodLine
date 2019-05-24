@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Test.Models.Pasta>
+@{
+    ViewBag.Title = "IndexPasta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pasta</h2>
+
+@foreach(var item in Model)
+{
+    <p>Name</p>
+    <p>@item.AuthorName</p>
+    <p>Text</p>
+    <p>@item.Text</p>
+}
+
