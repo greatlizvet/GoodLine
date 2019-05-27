@@ -80,3 +80,6 @@ F:\Projects\Sharp\Test\Test\obj\Debug\Test.pdb
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.InitialCreate.resources
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.csproj.GenerateResource.cache
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.NewTypeForStatus.resources
+F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.DataAnotation.resources
+F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.DownDataAnotation.resources
+F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.AddEndTimeField.resources

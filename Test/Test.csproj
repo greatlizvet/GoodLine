@@ -111,6 +111,18 @@
     <Compile Include="Migrations\201905231309438_NewTypeForStatus.Designer.cs">
       <DependentUpon>201905231309438_NewTypeForStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905270303052_DataAnotation.cs" />
+    <Compile Include="Migrations\201905270303052_DataAnotation.Designer.cs">
+      <DependentUpon>201905270303052_DataAnotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905270321221_DownDataAnotation.cs" />
+    <Compile Include="Migrations\201905270321221_DownDataAnotation.Designer.cs">
+      <DependentUpon>201905270321221_DownDataAnotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905270335039_AddEndTimeField.cs" />
+    <Compile Include="Migrations\201905270335039_AddEndTimeField.Designer.cs">
+      <DependentUpon>201905270335039_AddEndTimeField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseContext.cs" />
     <Compile Include="Models\Pasta.cs" />
@@ -123,6 +135,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\IndexPasta.cshtml" />
+    <Content Include="Views\Home\ErrorPasta.cshtml" />
+    <Content Include="Views\Home\TimeErrorPasta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,6 +153,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905231309438_NewTypeForStatus.resx">
       <DependentUpon>201905231309438_NewTypeForStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905270303052_DataAnotation.resx">
+      <DependentUpon>201905270303052_DataAnotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905270321221_DownDataAnotation.resx">
+      <DependentUpon>201905270321221_DownDataAnotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905270335039_AddEndTimeField.resx">
+      <DependentUpon>201905270335039_AddEndTimeField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

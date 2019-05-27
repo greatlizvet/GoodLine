@@ -1,16 +1,20 @@
-﻿@model IEnumerable<Test.Models.Pasta>
+﻿@model Test.Models.Pasta
 @{
     ViewBag.Title = "IndexPasta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Pasta</h2>
-
-@foreach(var item in Model)
-{
-    <p>Name</p>
-    <p>@item.AuthorName</p>
-    <p>Text</p>
-    <p>@item.Text</p>
-}
+    <dt>
+        @Html.DisplayNameFor(model => model.AuthorName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AuthorName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Text)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Text)
+    </dd>
 

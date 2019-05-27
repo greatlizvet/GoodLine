@@ -16,9 +16,7 @@ namespace Test.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var pasta = from p in db.Pastas
-                        select p;
-            List<Pasta> model = pasta.ToList();
+            List<Pasta> model = GetList();
             return View(model);
         }
 
@@ -27,12 +25,11 @@ namespace Test.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Pastas.Add(new Pasta { AuthorName = Request.Form["name"], Text = Request.Form["text"], Status = Request.Form["status"], Time = Request.Form["time"], Hash = GenerateHash() });
+                db.Pastas.Add(new Pasta { AuthorName = Request.Form["name"], Text = Request.Form["text"], Status = Request.Form["status"], Time = Request.Form["time"], Hash = GenerateHash(), CreationDate = DateTime.Now, EndTime = GetTime(pasta)});
                 db.SaveChanges();
-                return View("Index");
             }
-
-            return View("Index");
+            List<Pasta> model = GetList();
+            return View("Index", model);
         }
 
         [HttpGet]
@@ -42,12 +39,18 @@ namespace Test.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var pasta = from p in db.Pastas
-                        select p;
-            pasta = pasta.Where(p => p.Hash == Hash);
+            Pasta pasta = db.Pastas.FirstOrDefault(p => p.Hash == Hash);
             if(pasta == null)
             {
                 return HttpNotFound();
+            }
+            if (DateTime.Now >= pasta.EndTime)
+            {
+                return View("TimeErrorPasta");
+            }
+            if (pasta.Status == "1")
+            {
+                return View("ErrorPasta");
             }
             return View(pasta);
         }
@@ -63,14 +66,35 @@ namespace Test.Controllers
                     rng.GetBytes(bytes);
                 }
                 Hash = BitConverter.ToString(bytes).Replace("-", "").ToLower();
-                var pasta = from p in db.Pastas
-                            where p.Hash == Hash
-                            select p.Hash;
-                string hash1 = pasta.ToString();
-                if (Hash != hash1)
+                Pasta pasta = db.Pastas.FirstOrDefault(p => p.Hash == Hash);
+                if (pasta == null)
                     break;
             }
             return Hash;
+        }
+
+        private List<Pasta> GetList()
+        {
+            var pasta = from p in db.Pastas
+                        select p;
+            List<Pasta> model = pasta.ToList();
+            model.Reverse();
+            return model;
+        }
+
+        private DateTime GetTime(Pasta pasta)
+        {
+            DateTime endDate;
+            switch(pasta.Time)
+            {
+                case "10M":
+                    return endDate = DateTime.Now.AddMinutes(10);
+                case "1D":
+                    return endDate = DateTime.Now.AddDays(1);
+                case "1M":
+                    return endDate = DateTime.Now.AddMonths(1);
+            }
+            return endDate = new DateTime(2050, 01, 01);
         }
     }
 }
