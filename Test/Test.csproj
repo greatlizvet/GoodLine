@@ -123,6 +123,14 @@
     <Compile Include="Migrations\201905270335039_AddEndTimeField.Designer.cs">
       <DependentUpon>201905270335039_AddEndTimeField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905280946164_NullableEndTime.cs" />
+    <Compile Include="Migrations\201905280946164_NullableEndTime.Designer.cs">
+      <DependentUpon>201905280946164_NullableEndTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905281041194_Annotation.cs" />
+    <Compile Include="Migrations\201905281041194_Annotation.Designer.cs">
+      <DependentUpon>201905281041194_Annotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseContext.cs" />
     <Compile Include="Models\Pasta.cs" />
@@ -162,6 +170,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905270335039_AddEndTimeField.resx">
       <DependentUpon>201905270335039_AddEndTimeField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905280946164_NullableEndTime.resx">
+      <DependentUpon>201905280946164_NullableEndTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281041194_Annotation.resx">
+      <DependentUpon>201905281041194_Annotation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

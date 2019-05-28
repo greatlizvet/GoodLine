@@ -1,33 +1,54 @@
-﻿@model List<Test.Models.Pasta>
+﻿@model Test.Models.Pasta
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post" action="~/Home/CreatePasta">
-    <h1>Pasta</h1>
-    <textarea name="text" rows="10"></textarea>
-    <p>Author's name</p>
-    <input type="text" name="name" />
-    <p>Status</p>
-    <select name="status">
-        <option value="0">Public</option>
-        <option value="1">Unlisted</option>
-    </select>
-    <p>Time</p>
-    <select name="time">
-        <option value="10M">10 minut</option>
-        <option value="1D">1 day</option>
-        <option value="1M">1 mounth</option>
-        <option value="Always">Always</option>
-    </select>
-    <input type="submit" value="Send"/>
-</form>
+@using (Html.BeginForm("CreatePasta", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<div>
+    <h2>Create new Pasta</h2>
+    <hr />
+    <div>
+        @Html.LabelFor(model => model.AuthorName)
+        <div>
+            <input type="text" name="authorname"/>
+            @Html.ValidationMessageFor(model => model.AuthorName)
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Text)
+        <div>
+            <textarea name="text"></textarea>
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Status)
+        <div>
+            <select name="status">
+                <option value="0">Public</option>
+                <option value="1">Unlisted</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Time)
+        <div>
+            <select name="time">
+                <option value="10M">10 minutes</option>
+                <option value="1D">1 days</option>
+                <option value="1M">1 month</option>
+                <option value="Always">Always</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Send" />
+    </div>
+</div>
+}
 <div>
     <p>Last pastas</p>
-    @foreach(var item in Model)
-    {
-        @Html.ActionLink(item.AuthorName, "IndexPasta", new { hash = item.Hash });
-        <br />
-    }
 </div>

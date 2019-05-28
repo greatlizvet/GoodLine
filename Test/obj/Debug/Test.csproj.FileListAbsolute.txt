@@ -83,3 +83,5 @@ F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.NewTypeForStatus.resources
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.DataAnotation.resources
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.DownDataAnotation.resources
 F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.AddEndTimeField.resources
+F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.NullableEndTime.resources
+F:\Projects\Sharp\Test\Test\obj\Debug\Test.Migrations.Annotation.resources

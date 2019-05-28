@@ -16,20 +16,20 @@ namespace Test.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<Pasta> model = GetList();
-            return View(model);
+            return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreatePasta(Pasta pasta)
         {
             if (ModelState.IsValid)
             {
-                db.Pastas.Add(new Pasta { AuthorName = Request.Form["name"], Text = Request.Form["text"], Status = Request.Form["status"], Time = Request.Form["time"], Hash = GenerateHash(), CreationDate = DateTime.Now, EndTime = GetTime(pasta)});
+                db.Pastas.Add(new Pasta {AuthorName = Request.Form["authorname"], Text = Request.Form["text"], Status = Request.Form["status"], Time = Request.Form["time"], Hash = GenerateHash(), CreationDate = DateTime.Now, EndTime = GetTime(pasta) });
                 db.SaveChanges();
             }
-            List<Pasta> model = GetList();
-            return View("Index", model);
+            ViewBag.List = GetList();
+            return View("Index", pasta);
         }
 
         [HttpGet]
@@ -44,13 +44,20 @@ namespace Test.Controllers
             {
                 return HttpNotFound();
             }
-            if (DateTime.Now >= pasta.EndTime)
+            if(pasta.EndTime == null)
             {
-                return View("TimeErrorPasta");
+                return View(pasta);
             }
-            if (pasta.Status == "1")
+            else
             {
-                return View("ErrorPasta");
+                if (DateTime.Now >= pasta.EndTime)
+                {
+                    return View("TimeErrorPasta");
+                }
+                if(pasta.Status == "1")
+                {
+                    return View("ErrorPasta");
+                }
             }
             return View(pasta);
         }
@@ -82,9 +89,9 @@ namespace Test.Controllers
             return model;
         }
 
-        private DateTime GetTime(Pasta pasta)
+        private DateTime? GetTime(Pasta pasta)
         {
-            DateTime endDate;
+            DateTime? endDate = null;
             switch(pasta.Time)
             {
                 case "10M":
@@ -94,7 +101,7 @@ namespace Test.Controllers
                 case "1M":
                     return endDate = DateTime.Now.AddMonths(1);
             }
-            return endDate = new DateTime(2050, 01, 01);
+            return endDate = null;
         }
     }
 }
