@@ -8,52 +8,53 @@
 @using (Html.BeginForm("CreatePasta", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-<div>
-    <h2>Create new Pasta</h2>
-    <hr />
     <div>
-        @Html.LabelFor(model => model.AuthorName)
+        <h2>Create new Pasta</h2>
+        <hr />
         <div>
-            <input type="text" name="authorname"/>
-            @Html.ValidationMessageFor(model => model.AuthorName)
+            @Html.LabelFor(model => model.AuthorName)
+            <div>
+                <input type="text" name="authorname" />
+                @Html.ValidationMessageFor(model => model.AuthorName)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Text)
+            <div>
+                <textarea name="text"></textarea>
+                @Html.ValidationMessageFor(model => model.Text)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Status)
+            <div>
+                <select name="status">
+                    <option value="0">Public</option>
+                    <option value="1">Unlisted</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Time)
+            <div>
+                <select name="time">
+                    <option value="10M">10 minutes</option>
+                    <option value="1D">1 days</option>
+                    <option value="1M">1 month</option>
+                    <option value="Always">Always</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Send" />
         </div>
     </div>
-    <div>
-        @Html.LabelFor(model => model.Text)
-        <div>
-            <textarea name="text"></textarea>
-            @Html.ValidationMessageFor(model => model.Text)
-        </div>
-    </div>
-    <div>
-        @Html.LabelFor(model => model.Status)
-        <div>
-            <select name="status">
-                <option value="0">Public</option>
-                <option value="1">Unlisted</option>
-            </select>
-        </div>
-    </div>
-    <div>
-        @Html.LabelFor(model => model.Time)
-        <div>
-            <select name="time">
-                <option value="10M">10 minutes</option>
-                <option value="1D">1 days</option>
-                <option value="1M">1 month</option>
-                <option value="Always">Always</option>
-            </select>
-        </div>
-    </div>
-    <div>
-        <input type="submit" value="Send" />
-    </div>
-</div>
 }
-<div>
-    <p>Last pastas</p>
-    @for (int i = 0; i < 10; i++)
-    {
-        <p>@Html.ActionLink(list[i].AuthorName, "IndexPasta", new { hash = list[i].Hash })</p>
-    }
-</div>
+    <div>
+        <p>Last pastas</p>
+        @for (int i = 0; i < 10; i++)
+        {
+            //<p>@Html.ActionLink(list[i].AuthorName, "IndexPasta", new { hash = list[i].Hash })</p>
+            <p><a href="/Home/IndexPasta/@list[i].Hash">@list[i].AuthorName</a></p>
+        }
+    </div>

@@ -34,22 +34,23 @@ namespace Test.Controllers
         }
 
         [HttpGet]
-        public ActionResult IndexPasta(string Hash)
+        public ActionResult IndexPasta(string hash)
         {
-            if (Hash == null)
+            ViewBag.PastaHash = hash;
+            if (hash == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pasta pasta = db.Pastas.FirstOrDefault(p => p.Hash == Hash);
+            Pasta pasta = db.Pastas.FirstOrDefault(p => p.Hash == hash);
             if(pasta == null)
             {
                 return HttpNotFound();
             }
-            if (pasta.Status == "1")
-            {
-                return View("ErrorPasta");
-            }
-            if (pasta.EndTime == null)
+            if(pasta.Status == "1")
+                {
+                    return View("ErrorPasta");
+                }
+            if(pasta.EndTime == null)
             {
                 return View(pasta);
             }

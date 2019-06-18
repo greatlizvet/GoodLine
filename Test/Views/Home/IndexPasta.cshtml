@@ -5,6 +5,8 @@
 }
 
 <h2>Pasta</h2>
+<form method="get">
+    <input type="hidden" value="@ViewBag.PastaHash" name="PastaHash"/>
     <dt>
         @Html.DisplayNameFor(model => model.AuthorName)
     </dt>
@@ -17,6 +19,7 @@
     <dd>
         @Html.DisplayFor(model => model.Text)
     </dd>
+</form>
 <hr />
 <p>@Html.ActionLink("Обратно", "Index")</p>
 
