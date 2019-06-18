@@ -16,6 +16,7 @@ namespace Test.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.List = GetList(); 
             return View();
         }
 
@@ -44,7 +45,11 @@ namespace Test.Controllers
             {
                 return HttpNotFound();
             }
-            if(pasta.EndTime == null)
+            if (pasta.Status == "1")
+            {
+                return View("ErrorPasta");
+            }
+            if (pasta.EndTime == null)
             {
                 return View(pasta);
             }
@@ -53,10 +58,6 @@ namespace Test.Controllers
                 if (DateTime.Now >= pasta.EndTime)
                 {
                     return View("TimeErrorPasta");
-                }
-                if(pasta.Status == "1")
-                {
-                    return View("ErrorPasta");
                 }
             }
             return View(pasta);
