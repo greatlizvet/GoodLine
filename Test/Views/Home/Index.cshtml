@@ -14,14 +14,14 @@
         <div>
             @Html.LabelFor(model => model.AuthorName)
             <div>
-                <input type="text" name="authorname" />
+                @Html.TextBoxFor(model => model.AuthorName)
                 @Html.ValidationMessageFor(model => model.AuthorName)
             </div>
         </div>
         <div>
             @Html.LabelFor(model => model.Text)
             <div>
-                <textarea name="text"></textarea>
+                @Html.TextAreaFor(model => model.Text)
                 @Html.ValidationMessageFor(model => model.Text)
             </div>
         </div>
@@ -54,7 +54,6 @@
         <p>Last pastas</p>
         @for (int i = 0; i < 10; i++)
         {
-            //<p>@Html.ActionLink(list[i].AuthorName, "IndexPasta", new { hash = list[i].Hash })</p>
-            <p><a href="/Home/IndexPasta/@list[i].Hash">@list[i].AuthorName</a></p>
+            <p>@Html.ActionLink(list[i].AuthorName, "IndexPasta", new { hash = list[i].Hash })</p>
         }
     </div>
